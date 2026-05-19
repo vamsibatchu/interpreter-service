@@ -37,10 +37,14 @@ TWILIO_NUMBER = os.getenv("TWILIO_PHONE_NUMBER", "")
 SERVER_URL = os.getenv("SERVER_URL", "")
 
 
+def clean(val: str) -> str:
+    """Strip quotes and whitespace Railway adds around env var values."""
+    return val.strip().strip('"').strip("'").strip()
+
 def get_twilio_client():
     """Create a fresh Twilio client reading env vars at call time."""
-    sid = os.getenv("TWILIO_ACCOUNT_SID", "")
-    token = os.getenv("TWILIO_AUTH_TOKEN", "")
+    sid   = clean(os.getenv("TWILIO_ACCOUNT_SID", ""))
+    token = clean(os.getenv("TWILIO_AUTH_TOKEN", ""))
     log.info(f"Twilio SID: '{sid[:8] if sid else 'EMPTY'}' Token: '{'SET' if token else 'EMPTY'}'")
     return Client(sid, token)
 
@@ -91,8 +95,8 @@ async def connect_parties(request: Request):
         "contact_number": contact_number,
     })
 
-    twilio_number = os.getenv("TWILIO_PHONE_NUMBER", "")
-    server_url = os.getenv("SERVER_URL", "")
+    twilio_number = clean(os.getenv("TWILIO_PHONE_NUMBER", ""))
+    server_url    = clean(os.getenv("SERVER_URL", ""))
 
     log.info(f"Dialing {contact_number} from {twilio_number} via {server_url}")
 
