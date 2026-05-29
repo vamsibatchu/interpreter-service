@@ -40,8 +40,8 @@ def clean(val: str) -> str:
 
 def get_twilio_client():
     """Create a fresh Twilio client reading env vars at call time."""
-    sid   = clean(os.getenv("TWILIO_ACCOUNT_SID", "AC72526c0568b936116dd72ece8f2f0718"))
-    token = clean(os.getenv("TWILIO_AUTH_TOKEN",  "379b939667adec3d318fd5f35ea82709"))
+    sid   = clean(os.getenv("TWILIO_ACCOUNT_SID", "AC879e47fa060076ce3c23744d3871618d"))
+    token = clean(os.getenv("TWILIO_AUTH_TOKEN",  "cb968f323bbe11ee561d0df8a06ae6ae"))
     log.info(f"Twilio SID: '{sid[:8] if sid else 'EMPTY'}' Token: '{'SET' if token else 'EMPTY'}'")
     return Client(sid, token)
 
