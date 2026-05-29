@@ -145,12 +145,17 @@ class RTTBridge:
         log.info(f"[{self.call_sid}] Connecting RTT sessions...")
 
         try:
-            await asyncio.gather(
-                self._caller_rtt.connect(),
-                self._contact_rtt.connect(),
-            )
+            await self._caller_rtt.connect()
+            log.info(f"[{self.call_sid}] Caller RTT connected")
         except Exception as e:
-            log.error(f"[{self.call_sid}] Failed to connect RTT sessions: {e}")
+            log.error(f"[{self.call_sid}] Failed to connect caller RTT: {e}")
+            return
+        
+        try:
+            await self._contact_rtt.connect()
+            log.info(f"[{self.call_sid}] Contact RTT connected")
+        except Exception as e:
+            log.error(f"[{self.call_sid}] Failed to connect contact RTT: {e}")
             return
 
         log.info(f"[{self.call_sid}] RTT bridge active — {self.caller_lang} <-> {self.contact_lang}")
