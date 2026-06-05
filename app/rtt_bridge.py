@@ -21,7 +21,7 @@ from fastapi import WebSocket
 log = logging.getLogger(__name__)
 
 RTT_ENDPOINT = "wss://api.elevenlabs.io/v1/realtime-translation"
-XI_API_KEY   = os.getenv("ELEVENLABS_API_KEY", "")
+XI_API_KEY   = os.getenv("ELEVENLABS_API_KEY", "sk_f133423cf1769655d3776873b7379561f39c1143e279831c")
 VOICE_ID     = os.getenv("ELEVENLABS_VOICE_ID", "21m00Tcm4TlvDq8ikWAM")
 
 # Language name to ISO 639-1 code
